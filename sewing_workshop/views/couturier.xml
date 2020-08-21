@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="couturier_tree" model="ir.ui.view">
+        <field name="name">couture.couturier.tree</field>
+        <field name="model">couture.couturier</field>
+        <field name="arch" type="xml">
+            <tree string="Infos Couturier">
+                <field name="couturier_name"/>
+                <field name="couturier_firstname"/>
+                <field name="contact"/>
+                <field name="couturier_age" force_save="1"/>
+                <field name="speciality"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="client_tree" model="ir.ui.view">
+        <field name="name">couture.client.tree</field>
+        <field name="model">couture.client</field>
+        <field name="arch" type="xml">
+            <tree string="Infos Client">
+                <field name="client_name"/>
+                <field name="client_firstname"/>
+                <field name="contact"/>
+                <field name="client_age" force_save="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="modele_tree" model="ir.ui.view">
+        <field name="name">couture.modele.tree</field>
+        <field name="model">couture.modele</field>
+        <field name="arch" type="xml">
+            <tree string="Liste des modèles">
+                <field name="modele_name"/>
+                <field name="modele_type"/>
+                <field name="modele_mesure"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <!-- FORM -->
+    
+    <record id="res_partner_inherit" model="ir.ui.view">
+        <field name="name">res.partner.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <field name="vat" position="before">
+                <field name="birthday"/>
+                <field name="age"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="modele_form" model="ir.ui.view">
+        <field name="name">couture.modele.form</field>
+        <field name="model">couture.modele</field>
+        <field name="arch" type="xml">
+            <form string="Modèle à concevoir">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="modele_name"/>
+                            <field name="modele_type"/>
+                            <field name="modele_mesure"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="couturier_form" model="ir.ui.view">
+        <field name="name">couture.couturier.form</field>
+        <field name="model">couture.couturier</field>
+        <field name="arch" type="xml">
+            <form string="Infos Couturier">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="couturier_name"/>
+                            <field name="couturier_firstname"/>
+                        </group>
+                        <group>
+                            <field name="contact"/>
+                        </group>
+                        <group>
+                            <field name="couturier_age"/>
+                            <field name="speciality"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Liste des clients">
+                            <field name="client">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="test"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_couturier" model="ir.actions.act_window">
+        <field name="name">Couturiers</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">couture.couturier</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_type">form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+            Créez Votre Premier Patient !
+            </p>
+        </field>
+    </record>
+
+    <record id="action_modele" model="ir.actions.act_window">
+        <field name="name">Modele</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">couture.modele</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_type">form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+            Créez Votre Premier modèle !
+            </p>
+        </field>
+    </record>
+
+    <record id="action_client" model="ir.actions.act_window">
+        <field name="name">Client</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">couture.client</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_type">form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+            Créez Votre Premier Client !
+            </p>
+        </field>
+    </record>
+    
+    <menuitem id="couture_root" name="Couture" sequence="0" />
+    <menuitem id="couture_couturier" name="Couturiers" parent="couture_root" action="action_couturier"/>
+    <menuitem id="couture_modele" name="Modèles" parent="couture_root" action="action_modele"/>
+    <menuitem id="couture_client" name="Clients" parent="couture_root" action="action_client"/>
+
+</odoo>
